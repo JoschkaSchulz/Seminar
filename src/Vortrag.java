@@ -1,6 +1,13 @@
+/*
+ * Seminar Vortrag
+ * 
+ * Versuch eine komplette Präsentation in Processing zu halten...
+ */
+
 import java.awt.Frame;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 
 public class Vortrag extends PApplet {
@@ -17,8 +24,8 @@ public class Vortrag extends PApplet {
 	private static int POINT4_Y = 65;
 	private static int POINT5_X = 15;
 	private static int POINT5_Y = 75;
-	private static int PAGENUMBER_X = 49;
-	private static int PAGENUMBER_Y = 95;
+	private static int FOOTER_PAGENUMBER_X = 90;
+	private static int FOOTER_NAME_X = 1;
 	
 	private int current = 0;
 	
@@ -33,7 +40,7 @@ public class Vortrag extends PApplet {
 		PApplet applet = new Vortrag();
 		frame.add(applet);
 		applet.init();
-		frame.setBounds(0, 0, 1024, 600);//768); 
+		frame.setBounds(0, 0, 1024, 768); 
 		frame.setVisible(true);
 	}
 	
@@ -66,7 +73,15 @@ public class Vortrag extends PApplet {
 		text(text, x, y);
 	}
 	
-	public void bullet1(String text) { p(text, getPerX(POINT1_X), getPerY(POINT1_Y));}
+	//(f)ooter text
+	public void f(String text, int x, int y) {
+		fill(0);
+		stroke(0);
+		textSize(16.0f);
+		text(text, x, y);
+	}
+	
+	public void bullet1(String text) {	p(text, getPerX(POINT1_X), getPerY(POINT1_Y));}
 	public void bullet2(String text) {	p(text, getPerX(POINT2_X), getPerY(POINT2_Y));}
 	public void bullet3(String text) {	p(text, getPerX(POINT3_X), getPerY(POINT3_Y));}
 	public void bullet4(String text) {	p(text, getPerX(POINT4_X), getPerY(POINT4_Y));}
@@ -82,16 +97,18 @@ public class Vortrag extends PApplet {
 	 */
 	public void vortragMaster() {
 		//Seitennummer
-		if(current > 0) p("Seite "+current+"/6",getPerX(PAGENUMBER_X), getPerY(PAGENUMBER_Y));
+		if(current > 0) f("Joschka Schulz",getPerX(FOOTER_NAME_X), height-10);
+				
+		//Seitennummer
+		if(current > 0) f("Seite "+current+"/6",getPerX(FOOTER_PAGENUMBER_X), height-10);
 	}
 	
 	/*
 	 * Seite 0 - Titelseite
 	 */
 	public void vortragPage0() {
-		h1("Processing",getPerX(HEAD_X), getPerY(HEAD_Y));
-		h2("Processing",getPerX(50), getPerY(55));
-		p("Processing", getPerX(50), getPerY(60));
+		h1("Processing",getPerX(25), getPerY(45));
+		p("Ein Vortrag von Joschka Schulz",getPerX(25), getPerY(50));
 	}
 	
 	/*
@@ -106,55 +123,332 @@ public class Vortrag extends PApplet {
 	 */
 	public void vortragPage2() {
 		h1("Was ist Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("- Grafische Programmiersprache");
+		bullet3("- angelehnt an Java");
+		bullet5("- 2D und 3D");
+//		bullet4("- ");
+//		bullet5("- ");
 	}
 	
 	/*
 	 * Seite 3 - 
 	 */
 	public void vortragPage3() {
-		h1("Seite 3",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("Test1");
-		bullet2("Test2");
-		bullet3("Test3");
-		bullet4("Test4");
-		bullet5("Test5");
+		h1("Wofür kann man es einsetzten?",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("- Interaktive Lichtinstallation");
+		bullet3("- Forschung");
+		bullet5("- Grafische Visualisierungen");
+//		bullet4("-");
+//		bullet5("-");
 	}
 	
 	/*
 	 * Seite 4 - 
 	 */
 	public void vortragPage4() {
-		h1("Seite 4",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Wie benutze ich Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("- Processing IDE");
+		bullet4("- Externe .jar Library");
 	}
 	
 	/*
 	 * Seite 5 - 
 	 */
 	public void vortragPage5() {
-		h1("Seite 5",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Aufbau einer Anwendung",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Klasse PApllet");
+		bullet2("public void setup()");
+		bullet3("public void draw()");
+		
+		//Bild
+		drawPlaceholder(getPerX(POINT1_X+35), getPerY(POINT1_Y-10), 500, 400);
 	}
 	
 	/*
 	 * Seite 6 - 
 	 */
 	public void vortragPage6() {
-		h1("Seite 6",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Das erste Fenster",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("size()");
+		bullet2("smooth()");
+		bullet3("framerate()");
+		
+		//Bild
+		drawPlaceholder(getPerX(POINT1_X+35), getPerY(POINT1_Y-10), 500, 400);
+	}
+	
+	/*
+	 * Seite 7 - 
+	 */
+	boolean page7demo = false;
+	public void vortragPage7() {
+		h1("Mausposition abfragen",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("- Position über Variablen");
+		bullet2("    - mouseX");
+		bullet3("    - mouseY");
+		
+		//Demo
+		if(page7demo) {
+			int x = getPerX(40);
+			int y = getPerY(50)+35;
+			int size = demoScreen("Mausposition", x, y-35);
+			if(mouseX > x && mouseX < x+size && mouseY > y && mouseY < y+size) {
+				p("mouseX = "+(mouseX-x),x+size+10,y);
+				p("mouseY = "+(mouseY-y),x+size+10,y+20);
+			}
+		}else{
+			if(keyCode == 68) page7demo = true;
+		}
+	}
+	
+	/*
+	 * Seite 8 - 
+	 */
+	boolean page8demo = false;
+	public void vortragPage8() {
+		h1("Tasten einlesen",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("- Einlesen durch Variablen und Methoden");
+		bullet2("- keyCode und key");
+		bullet3("- überladen von keyPressed()");
+		bullet4("- Für Maus mit mousePressed");
+		bullet5("- Weitere Methoden: keyReleased(), keyTyped()");
+		
+		//Demo
+		if(page8demo) {
+			int x = getPerX(50);
+			int y = getPerY(50)+35;
+			int size = demoScreen("Tasten", x, y-35);
+			if(keyPressed) {
+				p("key     = "+key,x+size+10,y);
+				p("keyCode = "+keyCode,x+size+10,y+20);
+			}
+		}else{
+			if(keyCode == 68) page8demo = true;
+		}
+	}
+	
+	/*
+	 * Seite 9 - 
+	 */
+	private boolean page9demo = false;
+	private int page9_x = 0, page9_y = 0, page9_w = 0, page9_h = 0;
+	private int page9_rx = 0, page9_ry = 0, page9_rw = 0, page9_rh = 0;
+	public void vortragPage9() {
+		h1("Das erste Rechteck...",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Methode: rect(x,y,width,height)");
+		bullet2("x,y koordinaten der linken oberen Kante");
+		bullet3("width ist die Breite");
+		bullet4("height ist die Höhe");
+
+		//Demo
+		if(page9demo) {
+			int x = getPerX(40);
+			int y = getPerY(50)+35;
+			int size = demoScreen("Rechteck", x, y-35);
+			if(page9_x != 0 && page9_w != 0) {
+				p("rect("+page9_x+","+page9_y+","+page9_w+","+page9_h+");",x+size+10,y);
+				noFill();
+				rect(page9_rx,page9_ry,page9_rw,page9_rh);
+			}
+			if(mouseX > x && mouseX < x+size && mouseY > y && mouseY < y+size) {
+				if(page9_x == 0){
+					p("rect("+(mouseX-x)+","+(mouseY-y)+",,);",x+size+10,y);
+					if(mousePressed) {
+						page9_x = (mouseX-x);
+						page9_rx = mouseX;
+						page9_y = (mouseY-y);
+						page9_ry = mouseY;
+					}
+				}else if (page9_w == 0) {
+					p("rect("+page9_x+","+page9_y+","+((mouseX-x)-page9_x)+","+((mouseY-y)-page9_y)+");",x+size+10,y);
+					if(mousePressed) {
+						page9_w = ((mouseX-x)-page9_x);
+						page9_rw = mouseX - page9_rx;
+						page9_h = ((mouseY-y)-page9_y);
+						page9_rh = mouseY - page9_ry;
+					}
+				}
+			}
+		}else{
+			if(keyCode == 68) page9demo = true;
+		}
+	}
+	
+	/*
+	 * Seite 10 - 
+	 */
+	private boolean page10demo = false;
+	private int page10_x = 0, page10_y = 0, page10_w = 0, page10_h = 0;
+	private int page10_rx = 0, page10_ry = 0, page10_rw = 0, page10_rh = 0;
+	private int page10_lx = 0, page10_ly = 0;
+	public void vortragPage10() {
+		h1("...und der erste Kreis",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Methode: ellipse(x,y,width,height)");
+		bullet2("x,y koordinaten der linken oberen Kante");
+		bullet3("width ist die Breite");
+		bullet4("height ist die Höhe");
+		bullet5("Methode ellipseMode(mode)");
+		//Demo
+		if(page10demo) {
+			int x = getPerX(40);
+			int y = getPerY(50)+35;
+			int size = demoScreen("Rechteck", x, y-35);
+			if(page10_x != 0 && page10_w != 0) {
+				p("ellipse("+page10_x+","+page10_y+","+page10_w+","+page10_h+");",x+size+10,y);
+				noFill();
+				ellipse(page10_rx,page10_ry,page10_rw*2,page10_rh*2);
+				color(255,0,0);
+				strokeWeight(5f);
+				line(page10_rx,page10_ry,page10_lx,page10_ry);
+				line(page10_rx,page10_ry,page10_rx,page10_ly);
+				strokeWeight(1f);
+				color(0);
+			}
+			if(mouseX > x && mouseX < x+size && mouseY > y && mouseY < y+size) {
+				if(page10_x == 0){
+					p("ellipse("+(mouseX-x)+","+(mouseY-y)+",,);",x+size+10,y);
+					if(mousePressed) {
+						page10_x = (mouseX-x);
+						page10_rx = mouseX;
+						page10_y = (mouseY-y);
+						page10_ry = mouseY;
+					}
+				}else if (page10_w == 0) {
+					p("ellipse("+page10_x+","+page10_y+","+((mouseX-x)-page10_x)+","+((mouseY-y)-page10_y)+");",x+size+10,y);
+					if(mousePressed) {
+						page10_w = ((mouseX-x)-page10_x);
+						page10_rw = mouseX - page10_rx;
+						page10_h = ((mouseY-y)-page10_y);
+						page10_rh = mouseY - page10_ry;
+						page10_lx = mouseX;
+						page10_ly = mouseY;
+					}
+				}
+			}
+		}else{
+			if(keyCode == 68) page10demo = true;
+		}
+	}
+	
+	/*
+	 * Seite 11 - 
+	 */
+	public void vortragPage11() {
+		h1("Farbe, Rand und Fülung",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Methode: color(r,g,b)");
+		bullet2("Methode: fill(r,g,b)");
+		bullet3("Methode: stroke(r,g,b)");
+		bullet4("Vor dem Zeichnen anwenden");
+		bullet5("alpha als 4. Parameter");
+		
+		//Bild der Programmierung
+		drawPlaceholder(getPerX(POINT1_X+35), getPerY(POINT1_Y-10), 500, 400);
+	}
+	
+	/*
+	 * Seite 12 - 
+	 */
+//	public void vortragPage12() {
+//		h1("Seite 12",getPerX(HEAD_X),getPerY(HEAD_Y));
+//	}
+	
+	/*
+	 * Seite 13 - 
+	 */
+//	public void vortragPage13() {
+//		h1("Seite 13",getPerX(HEAD_X),getPerY(HEAD_Y));
+//	}
+	
+	/*
+	 * Seite 14 - 
+	 */
+//	public void vortragPage14() {
+//		h1("Seite 14",getPerX(HEAD_X),getPerY(HEAD_Y));
+//	}
+	
+	/*
+	 * Seite 15 - Bilder laden
+	 */
+	public void vortragPage15() {
+		h1("Bilder Laden",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Methode: loadImage(filename)");
+		bullet3("Klasse: PImage");
+		bullet5("resize, filter, save...");
+		
+		//Als Demo evtl Pfeile oder Objekte in der Präsentation anklickbar?
+	}
+	
+	/*
+	 * Seite 16 - 
+	 */
+	public void vortragPage16() {
+		h1("Rotation",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Push-Matrix");
+		bullet2("translate");
+		bullet3("...");
+	}
+	
+	/*
+	 * Seite 17 - 
+	 */
+	public void vortragPage17() {
+		h1("Seite 17",getPerX(HEAD_X),getPerY(HEAD_Y));
+	}
+	
+	/*
+	 * Seite 18 - 
+	 */
+	public void vortragPage18() {
+		h1("Seite 18",getPerX(HEAD_X),getPerY(HEAD_Y));
+	}
+	
+	/*
+	 * Seite 19 - 
+	 */
+	public void vortragPage19() {
+		h1("Seite 19",getPerX(HEAD_X),getPerY(HEAD_Y));
+	}
+	
+	/*
+	 * Seite 20 - 
+	 */
+	public void vortragPage20() {
+		h1("Seite 20",getPerX(HEAD_X),getPerY(HEAD_Y));
 	}
 	
 	public void vortragEnd() {
 		background(0);
 	}
 	
+	public void drawPlaceholder(int x, int y, int w, int h) {
+		noFill();
+		line(x,y,x+w,y+h);
+		line(x+w,y,x,y+h);
+		rect(x,y,w,h);
+	}
+	
+	public int demoScreen(String text, int x, int y) {
+		int size = 300;
+		//noFill();
+		fill(255);
+		rect(x,y,size,35);
+		text(text,x+75,y+25);
+		rect(x,y+35,size,size);
+		return size;
+	}
+	
 	public void keyPressed() {
 		switch(keyCode) {
 			default:
-//				System.out.println("=>"+keyCode);
+				System.out.println(key+"=>"+keyCode);
 				break;
 			case 37: //Links
 				if(current > 0) current--;
 				break;
 			case 39: //Rechts
 				current++;
+				break;
+			case 27: //Esc
 				break;
 		}
 	}
@@ -174,6 +468,20 @@ public class Vortrag extends PApplet {
 			case 4: vortragPage4(); break;
 			case 5: vortragPage5(); break;
 			case 6: vortragPage6(); break;
+			case 7: vortragPage7(); break;
+			case 8: vortragPage8(); break;
+			case 9: vortragPage9(); break;
+			case 10: vortragPage10(); break;
+			case 11: vortragPage11(); break;
+//			case 12: vortragPage12(); break;
+//			case 13: vortragPage13(); break;
+//			case 14: vortragPage14(); break;
+			case 12: vortragPage15(); break;
+			case 13: vortragPage16(); break;
+			case 14: vortragPage17(); break;
+			case 15: vortragPage18(); break;
+			case 16: vortragPage19(); break;
+			case 17: vortragPage20(); break;
 		}
 	}
 }

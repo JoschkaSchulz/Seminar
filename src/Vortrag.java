@@ -7,6 +7,7 @@
 import java.awt.Frame;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
 
 
@@ -53,30 +54,30 @@ public class Vortrag extends PApplet {
 	}
 	
 	public void h1(String text, int x, int y) {
-		fill(0);
-		stroke(0);
+//		fill(255);
+//		stroke(0);
 		textSize(48.0f);
 		text(text, x, y);
 	}
 	
 	public void h2(String text, int x, int y) {
-		fill(0);
-		stroke(0);
+//		fill(255);
+//		stroke(0);
 		textSize(36.0f);
 		text(text, x, y);
 	}
 	
 	public void p(String text, int x, int y) {
-		fill(0);
-		stroke(0);
+//		fill(255);
+//		stroke(0);
 		textSize(24.0f);
 		text(text, x, y);
 	}
 	
 	//(f)ooter text
 	public void f(String text, int x, int y) {
-		fill(0);
-		stroke(0);
+//		fill(255);
+//		stroke(0);
 		textSize(16.0f);
 		text(text, x, y);
 	}
@@ -87,20 +88,50 @@ public class Vortrag extends PApplet {
 	public void bullet4(String text) {	p(text, getPerX(POINT4_X), getPerY(POINT4_Y));}
 	public void bullet5(String text) {	p(text, getPerX(POINT5_X), getPerY(POINT5_Y));}
 	
+	private PImage bg, demo, system, rotate, translate;
+	private PFont kreide;
 	public void setup() {
 		//Fullscreen
-		size(displayWidth,displayHeight);
+		size(1024,786);
+		//size(displayWidth,displayHeight);
+		
+		//Set font
+		kreide = createFont("Eraser.ttf", 32);
+		setChalkWhite();
+		
+		bg = loadImage("background.jpg");
+		bg.resize(width, height);
+		
+		demo = loadImage("demowindow.png");
+		system = loadImage("system.png");
+		system.resize(400, 400);
+		rotate = loadImage("rotate.png");
+		rotate.resize(250, 200);
+		translate = loadImage("translate.png");
+		translate.resize(200, 200);
+	}
+	
+	public void setChalkWhite() {
+		fill(255);
+		textFont(kreide);
+	}
+	public void setChalkBlack() {
+		fill(0);
+		textFont(kreide);
 	}
 	
 	/*
 	 * Master
 	 */
 	public void vortragMaster() {
+		//BACKGROUND
+		image(bg, 0, 0);
+		
 		//Seitennummer
-		if(current > 0) f("Joschka Schulz",getPerX(FOOTER_NAME_X), height-10);
+		if(current > 0) f("Joschka Schulz",getPerX(FOOTER_NAME_X), height-26);
 				
 		//Seitennummer
-		if(current > 0) f("Seite "+current+"/6",getPerX(FOOTER_PAGENUMBER_X), height-10);
+		if(current > 0) f("Seite "+current+"/6",getPerX(FOOTER_PAGENUMBER_X), height-26);
 	}
 	
 	/*
@@ -131,10 +162,10 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 3 - 
+	 * Seite 3 - Einsatzgebiete
 	 */
 	public void vortragPage3() {
-		h1("WofÃ¼r kann man es einsetzten?",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Einsatzgebiete",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("- Interaktive Lichtinstallation");
 		bullet3("- Forschung");
 		bullet5("- Grafische Visualisierungen");
@@ -143,7 +174,7 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 4 - 
+	 * Seite 4 - Wie benutze ich Processing
 	 */
 	public void vortragPage4() {
 		h1("Wie benutze ich Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
@@ -152,7 +183,7 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 5 - 
+	 * Seite 5 - Aufbau einer Anwendung
 	 */
 	public void vortragPage5() {
 		h1("Aufbau einer Anwendung",getPerX(HEAD_X),getPerY(HEAD_Y));
@@ -165,33 +196,35 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 6 - 
+	 * Seite 6 - Das erste Fenster
 	 */
 	public void vortragPage6() {
 		h1("Das erste Fenster",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("size()");
+		bullet1("size(width, height)");
 		bullet2("smooth()");
-		bullet3("framerate()");
+		bullet3("framerate(fps)");
 		
 		//Bild
-		drawPlaceholder(getPerX(POINT1_X+35), getPerY(POINT1_Y-10), 500, 400);
+		//drawPlaceholder(getPerX(POINT1_X+35), getPerY(POINT1_Y-10), 500, 400);
+		image(system,getPerX(POINT1_X+35), getPerY(POINT1_Y-10));
 	}
 	
 	/*
-	 * Seite 7 - 
+	 * Seite 7 - Mauspos
 	 */
 	boolean page7demo = false;
 	public void vortragPage7() {
 		h1("Mausposition abfragen",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("- Position Ã¼ber Variablen");
+		bullet1("- Position über Variablen");
 		bullet2("    - mouseX");
 		bullet3("    - mouseY");
 		
 		//Demo
 		if(page7demo) {
 			int x = getPerX(40);
-			int y = getPerY(50)+35;
-			int size = demoScreen("Mausposition", x, y-35);
+			int y = getPerY(50);
+			int size = demoScreen("Mausposition", x, y);
+			x+=6; y+=48;//Koordinaten korigieren
 			if(mouseX > x && mouseX < x+size && mouseY > y && mouseY < y+size) {
 				p("mouseX = "+(mouseX-x),x+size+10,y);
 				p("mouseY = "+(mouseY-y),x+size+10,y+20);
@@ -202,15 +235,15 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 8 - 
+	 * Seite 8 - Tasten einlesen
 	 */
 	boolean page8demo = false;
 	public void vortragPage8() {
 		h1("Tasten einlesen",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("- Einlesen durch Variablen und Methoden");
 		bullet2("- keyCode und key");
-		bullet3("- Ã¼berladen von keyPressed()");
-		bullet4("- FÃ¼r Maus mit mousePressed");
+		bullet3("- überladen von keyPressed()");
+		bullet4("- Für Maus mit mousePressed");
 		bullet5("- Weitere Methoden: keyReleased(), keyTyped()");
 		
 		//Demo
@@ -228,7 +261,7 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 9 - 
+	 * Seite 9 - Das erste Rechteck
 	 */
 	private boolean page9demo = false;
 	private int page9_x = 0, page9_y = 0, page9_w = 0, page9_h = 0;
@@ -238,7 +271,7 @@ public class Vortrag extends PApplet {
 		bullet1("Methode: rect(x,y,width,height)");
 		bullet2("x,y koordinaten der linken oberen Kante");
 		bullet3("width ist die Breite");
-		bullet4("height ist die HÃ¶he");
+		bullet4("height ist die Höhe");
 
 		//Demo
 		if(page9demo) {
@@ -275,7 +308,7 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 10 - 
+	 * Seite 10 - Der erste Kreis
 	 */
 	private boolean page10demo = false;
 	private int page10_x = 0, page10_y = 0, page10_w = 0, page10_h = 0;
@@ -286,7 +319,7 @@ public class Vortrag extends PApplet {
 		bullet1("Methode: ellipse(x,y,width,height)");
 		bullet2("x,y koordinaten der linken oberen Kante");
 		bullet3("width ist die Breite");
-		bullet4("height ist die HÃ¶he");
+		bullet4("height ist die Höhe");
 		bullet5("Methode ellipseMode(mode)");
 		//Demo
 		if(page10demo) {
@@ -331,10 +364,10 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 11 - 
+	 * Seite 11 - Farbe Rand und Füllung
 	 */
 	public void vortragPage11() {
-		h1("Farbe, Rand und FÃ¼lung",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Farbe, Rand und Fülung",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("Methode: color(r,g,b)");
 		bullet2("Methode: fill(r,g,b)");
 		bullet3("Methode: stroke(r,g,b)");
@@ -381,11 +414,32 @@ public class Vortrag extends PApplet {
 	/*
 	 * Seite 16 - 
 	 */
+	private boolean page16demo1 = false, page16demo2 = false, page16demo3 = false;
 	public void vortragPage16() {
-		h1("Rotation",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("Push-Matrix");
+		//Demo
+		if(page16demo1) {
+			translate(150f, 150f);
+		}else{
+			if(keyCode == 68) page16demo1 = true; // (d)emo
+		}
+		if(page16demo2) {
+			translate(-150f, -150f);
+		}else{
+			if(keyCode == 66) page16demo2 = true; // (b)ack
+		}
+		if(page16demo3) {
+			translate(-150f, -150f);
+		}else{
+			if(keyCode == 82) page16demo3 = true; // (r)otate
+		}
+		h1("rotate and translate",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet2("translate");
-		bullet3("...");
+		bullet1("pushMatrix und popMatrix");	//pushMatrix() <- Merkt sich den Ausgangspunkt und mit popMatrix wird er zurück gesetzt
+		bullet3("rotate");
+		
+		//Bild der des Zeichen Zettels
+		image(translate, getPerX(POINT1_X+35), getPerY(POINT1_Y));
+		image(rotate, getPerX(POINT1_X+55), getPerY(POINT3_Y));
 	}
 	
 	/*
@@ -427,13 +481,15 @@ public class Vortrag extends PApplet {
 		rect(x,y,w,h);
 	}
 	
+	//Start des Inhalts 6,48
 	public int demoScreen(String text, int x, int y) {
 		int size = 300;
 		//noFill();
-		fill(255);
-		rect(x,y,size,35);
-		text(text,x+75,y+25);
-		rect(x,y+35,size,size);
+		//fill(255);
+		//rect(x,y,size,35);
+		//text(text,x+75,y+25);
+		//rect(x,y+35,size,size);
+		image(demo, x, y);
 		return size;
 	}
 	
@@ -447,6 +503,12 @@ public class Vortrag extends PApplet {
 				break;
 			case 39: //Rechts
 				current++;
+				break;
+			case 38: //Hoch
+				current+=10;
+				break;
+			case 40: //Runter
+				if(current > 10) current-=10;
 				break;
 			case 27: //Esc
 				break;

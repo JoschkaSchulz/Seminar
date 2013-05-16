@@ -159,9 +159,9 @@ public class Vortrag extends PApplet {
 	 */
 	public void vortragPage2() {
 		h1("Einleitung - Was ist Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("- Grafische Programmiersprache");
-		bullet3("- angelehnt an Java");
-		bullet5("- 2D und 3D");
+		bullet1("Grafische Programmiersprache");
+		bullet3("angelehnt an Java");
+		bullet5("2D und 3D");
 //		bullet4("- ");
 //		bullet5("- ");
 	}
@@ -171,9 +171,9 @@ public class Vortrag extends PApplet {
 	 */
 	public void vortragPage3() {
 		h1("Einleitung - Einsatzgebiete",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("- Interaktive Lichtinstallation");
-		bullet3("- Forschung");
-		bullet5("- Grafische Visualisierungen");
+		bullet1("Interaktive Lichtinstallation");
+		bullet3("Forschung");
+		bullet5("Grafische Visualisierungen");
 //		bullet4("-");
 //		bullet5("-");
 	}
@@ -183,8 +183,8 @@ public class Vortrag extends PApplet {
 	 */
 	public void vortragPage4() {
 		h1("Wie benutze ich Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("- Processing IDE");
-		bullet4("- Externe .jar Library");
+		bullet1("Processing IDE");
+		bullet4("Externe .jar Library");
 	}
 	
 	/*
@@ -206,7 +206,7 @@ public class Vortrag extends PApplet {
 	public void vortragPage6() {
 		h1("Das erste Fenster",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("size(width, height)");
-		bullet2("smooth()");
+		bullet2("smooth() oder smooth(level)");			//Anti-Analysing/default ist auf on || level = 2x 4x 8x... 0 deaktiviert
 		bullet3("framerate(fps)");
 		
 		//Bild
@@ -220,9 +220,9 @@ public class Vortrag extends PApplet {
 	boolean page7demo = false;
 	public void vortragPage7() {
 		h1("Mausposition abfragen",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("- Position über Variablen");
-		bullet2("    - mouseX");
-		bullet3("    - mouseY");
+		bullet1("Position über Variablen");
+		bullet2("mouseX");
+		bullet3("mouseY");
 		
 		//Demo
 		if(page7demo) {
@@ -246,11 +246,11 @@ public class Vortrag extends PApplet {
 	boolean page8demo = false;
 	public void vortragPage8() {
 		h1("Tasten einlesen",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("- Einlesen durch Variablen und Methoden");
-		bullet2("- keyCode und key");
-		bullet3("- überladen von keyPressed()");
-		bullet4("- Für Maus mit mousePressed");
-		bullet5("- Weitere Methoden: keyReleased(), keyTyped()");
+		bullet1("Einlesen durch Variablen und Methoden");
+		bullet2("keyCode und key");
+		bullet3("überladen von keyPressed()");
+		bullet4("Für Maus mit mousePressed");
+		bullet5("Weitere Methoden: keyReleased(), keyTyped()");
 		
 		//Demo
 		if(page8demo) {
@@ -527,14 +527,7 @@ public class Vortrag extends PApplet {
 	//Start des Inhalts 6,48
 	public int demoScreen(String text, int x, int y) {
 		int size = 300;
-		//noFill();
-		//fill(255);
-		//rect(x,y,size,35);
-		//text(text,x+75,y+25);
-		//rect(x,y+35,size,size);
-		image(clouds,x-500,y-150);
-
-
+		image(clouds,x-500,y-150);	//Unbedingt Clouds anpassen!
 		fill(0);
 		rect(x+size+20,y,300,100);
 		fill(255);

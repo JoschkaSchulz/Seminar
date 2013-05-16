@@ -88,7 +88,7 @@ public class Vortrag extends PApplet {
 	public void bullet4(String text) {	p(text, getPerX(POINT4_X), getPerY(POINT4_Y));}
 	public void bullet5(String text) {	p(text, getPerX(POINT5_X), getPerY(POINT5_Y));}
 	
-	private PImage bg, demo, system, rotate, translate;
+	private PImage bg, demo, system, rotate, translate, clouds;
 	private PFont kreide;
 	public void setup() {
 		//Fullscreen
@@ -103,12 +103,17 @@ public class Vortrag extends PApplet {
 		bg.resize(width, height);
 		
 		demo = loadImage("demowindow.png");
+		
 		system = loadImage("system.png");
 		system.resize(400, 400);
+		
 		rotate = loadImage("rotate.png");
 		rotate.resize(250, 200);
+		
 		translate = loadImage("translate.png");
 		translate.resize(200, 200);
+		
+		clouds = loadImage("clouds.png");
 	}
 	
 	public void setChalkWhite() {
@@ -153,7 +158,7 @@ public class Vortrag extends PApplet {
 	 * Seite 2 - Was ist Processing
 	 */
 	public void vortragPage2() {
-		h1("Was ist Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Einleitung - Was ist Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("- Grafische Programmiersprache");
 		bullet3("- angelehnt an Java");
 		bullet5("- 2D und 3D");
@@ -165,7 +170,7 @@ public class Vortrag extends PApplet {
 	 * Seite 3 - Einsatzgebiete
 	 */
 	public void vortragPage3() {
-		h1("Einsatzgebiete",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Einleitung - Einsatzgebiete",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("- Interaktive Lichtinstallation");
 		bullet3("- Forschung");
 		bullet5("- Grafische Visualisierungen");
@@ -226,8 +231,9 @@ public class Vortrag extends PApplet {
 			int size = demoScreen("Mausposition", x, y);
 			x+=6; y+=48;//Koordinaten korigieren
 			if(mouseX > x && mouseX < x+size && mouseY > y && mouseY < y+size) {
-				p("mouseX = "+(mouseX-x),x+size+10,y);
-				p("mouseY = "+(mouseY-y),x+size+10,y+20);
+				p("Konsole",x+size+20,y-20);
+				p("mouseX = "+(mouseX-x),x+size+20,y);
+				p("mouseY = "+(mouseY-y),x+size+20,y+20);
 			}
 		}else{
 			if(keyCode == 68) page7demo = true;
@@ -249,11 +255,13 @@ public class Vortrag extends PApplet {
 		//Demo
 		if(page8demo) {
 			int x = getPerX(50);
-			int y = getPerY(50)+35;
-			int size = demoScreen("Tasten", x, y-35);
+			int y = getPerY(50);
+			int size = demoScreen("Tasten", x, y);
+			x+=6; y+=48;//Koordinaten korigieren
 			if(keyPressed) {
-				p("key     = "+key,x+size+10,y);
-				p("keyCode = "+keyCode,x+size+10,y+20);
+				p("Konsole",x+size+20,y-20);
+				p("key     = "+key,x+size+20,y);
+				p("keyCode = "+keyCode,x+size+20,y+20);
 			}
 		}else{
 			if(keyCode == 68) page8demo = true;
@@ -277,15 +285,18 @@ public class Vortrag extends PApplet {
 		if(page9demo) {
 			int x = getPerX(40);
 			int y = getPerY(50)+35;
-			int size = demoScreen("Rechteck", x, y-35);
+			int size = demoScreen("Rechteck", x, y);
+			x+=6; y+=48;//Koordinaten korigieren
 			if(page9_x != 0 && page9_w != 0) {
-				p("rect("+page9_x+","+page9_y+","+page9_w+","+page9_h+");",x+size+10,y);
+				p("Konsole",x+size+20,y-20);
+				p("rect("+page9_x+","+page9_y+","+page9_w+","+page9_h+");",x+size+20,y);
 				noFill();
 				rect(page9_rx,page9_ry,page9_rw,page9_rh);
 			}
 			if(mouseX > x && mouseX < x+size && mouseY > y && mouseY < y+size) {
 				if(page9_x == 0){
-					p("rect("+(mouseX-x)+","+(mouseY-y)+",,);",x+size+10,y);
+					p("Konsole",x+size+20,y-20);
+					p("rect("+(mouseX-x)+","+(mouseY-y)+",,);",x+size+20,y);
 					if(mousePressed) {
 						page9_x = (mouseX-x);
 						page9_rx = mouseX;
@@ -293,7 +304,8 @@ public class Vortrag extends PApplet {
 						page9_ry = mouseY;
 					}
 				}else if (page9_w == 0) {
-					p("rect("+page9_x+","+page9_y+","+((mouseX-x)-page9_x)+","+((mouseY-y)-page9_y)+");",x+size+10,y);
+					p("Konsole",x+size+20,y-20);
+					p("rect("+page9_x+","+page9_y+","+((mouseX-x)-page9_x)+","+((mouseY-y)-page9_y)+");",x+size+20,y);
 					if(mousePressed) {
 						page9_w = ((mouseX-x)-page9_x);
 						page9_rw = mouseX - page9_rx;
@@ -326,8 +338,10 @@ public class Vortrag extends PApplet {
 			int x = getPerX(40);
 			int y = getPerY(50)+35;
 			int size = demoScreen("Rechteck", x, y-35);
+			x+=6; y+=48;//Koordinaten korigieren
 			if(page10_x != 0 && page10_w != 0) {
-				p("ellipse("+page10_x+","+page10_y+","+page10_w+","+page10_h+");",x+size+10,y);
+				p("Konsole",x+size+20,y-20);
+				p("ellipse("+page10_x+","+page10_y+","+page10_w+","+page10_h+");",x+size+50,y);
 				noFill();
 				ellipse(page10_rx,page10_ry,page10_rw*2,page10_rh*2);
 				color(255,0,0);
@@ -339,7 +353,8 @@ public class Vortrag extends PApplet {
 			}
 			if(mouseX > x && mouseX < x+size && mouseY > y && mouseY < y+size) {
 				if(page10_x == 0){
-					p("ellipse("+(mouseX-x)+","+(mouseY-y)+",,);",x+size+10,y);
+					p("Konsole",x+size+20,y-20);
+					p("ellipse("+(mouseX-x)+","+(mouseY-y)+",,);",x+size+20,y);
 					if(mousePressed) {
 						page10_x = (mouseX-x);
 						page10_rx = mouseX;
@@ -347,7 +362,8 @@ public class Vortrag extends PApplet {
 						page10_ry = mouseY;
 					}
 				}else if (page10_w == 0) {
-					p("ellipse("+page10_x+","+page10_y+","+((mouseX-x)-page10_x)+","+((mouseY-y)-page10_y)+");",x+size+10,y);
+					p("Konsole",x+size+20,y-20);
+					p("ellipse("+page10_x+","+page10_y+","+((mouseX-x)-page10_x)+","+((mouseY-y)-page10_y)+");",x+size+20,y);
 					if(mousePressed) {
 						page10_w = ((mouseX-x)-page10_x);
 						page10_rw = mouseX - page10_rx;
@@ -412,7 +428,7 @@ public class Vortrag extends PApplet {
 	}
 	
 	/*
-	 * Seite 16 - 
+	 * Seite 16 - rotate, translate, pushmatix
 	 */
 	private boolean page16demo1 = false, page16demo2 = false, page16demo3 = false;
 	public void vortragPage16() {
@@ -428,7 +444,6 @@ public class Vortrag extends PApplet {
 			if(keyCode == 66) page16demo2 = true; // (b)ack
 		}
 		if(page16demo3) {
-			translate(-150f, -150f);
 		}else{
 			if(keyCode == 82) page16demo3 = true; // (r)otate
 		}
@@ -446,33 +461,60 @@ public class Vortrag extends PApplet {
 	 * Seite 17 - 
 	 */
 	public void vortragPage17() {
-		h1("Seite 17",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Shapes",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("mehrere vertex(x,y)");
+		bullet2("beginShape() und endShape()");
+		bullet3("POINTS, LINES, TRIANGLES, QUADS");
 	}
 	
 	/*
 	 * Seite 18 - 
 	 */
-	public void vortragPage18() {
-		h1("Seite 18",getPerX(HEAD_X),getPerY(HEAD_Y));
-	}
+//	public void vortragPage18() {
+//		h1("Seite 18",getPerX(HEAD_X),getPerY(HEAD_Y));
+//	}
 	
 	/*
-	 * Seite 19 - 
+	 * Seite 19 - Open Processing
 	 */
 	public void vortragPage19() {
-		h1("Seite 19",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Open Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Platform für Processing Applikationen");
+		bullet2("http://www.openprocessing.org/");
 	}
+	
 	
 	/*
 	 * Seite 20 - 
 	 */
 	public void vortragPage20() {
-		h1("Seite 20",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Fazit",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Vielseitig Nutzbar");
+		bullet2("Leichte Handhabung");
+		bullet3("Schnelles Programmieren");
 	}
+	
+	/*
+	 * Seite 21 - 
+	 */
+	public void vortragPage21() {
+		h1("Quellen",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Processing (O'Reillys Basics) [978-3-89721-997-7]");
+		bullet2("http://processing.org");
+	}
+	
+	/*
+	 * Seite 22 - 
+	 */
+	public void vortragPage22() {
+		h1("Vielen Dank",getPerX(25), getPerY(45));
+	}
+	
 	
 	public void vortragEnd() {
 		background(0);
 	}
+	
 	
 	public void drawPlaceholder(int x, int y, int w, int h) {
 		noFill();
@@ -480,6 +522,7 @@ public class Vortrag extends PApplet {
 		line(x+w,y,x,y+h);
 		rect(x,y,w,h);
 	}
+	
 	
 	//Start des Inhalts 6,48
 	public int demoScreen(String text, int x, int y) {
@@ -489,6 +532,12 @@ public class Vortrag extends PApplet {
 		//rect(x,y,size,35);
 		//text(text,x+75,y+25);
 		//rect(x,y+35,size,size);
+		image(clouds,x-500,y-150);
+
+
+		fill(0);
+		rect(x+size+20,y,300,100);
+		fill(255);
 		image(demo, x, y);
 		return size;
 	}
@@ -541,9 +590,11 @@ public class Vortrag extends PApplet {
 			case 12: vortragPage15(); break;
 			case 13: vortragPage16(); break;
 			case 14: vortragPage17(); break;
-			case 15: vortragPage18(); break;
-			case 16: vortragPage19(); break;
-			case 17: vortragPage20(); break;
+//			case 15: vortragPage18(); break;
+			case 15: vortragPage19(); break;
+			case 16: vortragPage20(); break;
+			case 17: vortragPage21(); break;
+			case 18: vortragPage22(); break;
 		}
 	}
 }

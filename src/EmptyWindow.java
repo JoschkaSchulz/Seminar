@@ -20,8 +20,17 @@ public class EmptyWindow extends PApplet {
 		vertexList.add(new Point(mouseX, mouseY));
 	}
 	
+	public void keyReleased() {
+		System.out.println("key Released");
+	}
+	
+	public void keyTyped() {
+		System.out.println("key Typed");
+	}
 	
 	public void keyPressed() {
+		System.out.println("keyPressed");
+		/*
 		if(!mousePressed) {
 			System.out.println("change...");
 			if(mode == POINTS) {
@@ -39,7 +48,7 @@ public class EmptyWindow extends PApplet {
 			}else if( mode == QUAD_STRIP) {
 				mode = POINTS;
 			}
-		}
+		}*/
 	}
 	
 	public void draw() {

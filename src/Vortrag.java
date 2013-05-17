@@ -35,7 +35,7 @@ public class Vortrag extends PApplet {
 	}
 	
 	public static void main(String[] args) {
-		Frame frame = new Frame("Processing - PrÃ¤sentation");
+		Frame frame = new Frame("Processing - Präsentation");
 		frame.setUndecorated(true);
 		// The name "sketch_name" must match the name of your program
 		PApplet applet = new Vortrag();
@@ -136,7 +136,7 @@ public class Vortrag extends PApplet {
 		if(current > 0) f("Joschka Schulz",getPerX(FOOTER_NAME_X), height-26);
 				
 		//Seitennummer
-		if(current > 0) f("Seite "+current+"/6",getPerX(FOOTER_PAGENUMBER_X), height-26);
+		if(current > 0) f("Seite "+current+"/18",getPerX(FOOTER_PAGENUMBER_X), height-26);
 	}
 	
 	/*
@@ -152,6 +152,41 @@ public class Vortrag extends PApplet {
 	 */
 	public void vortragPage1() {
 		h1("Gliederung",getPerX(HEAD_X),getPerY(HEAD_Y));
+		//Was ist Processing
+		p("Was ist Processing",getPerX(POINT1_X),getPerY(POINT1_Y));
+		//Einsatzgebiete
+		p("Einsatzgebiete",getPerX(POINT1_X),getPerY(POINT1_Y)+20);
+		
+		//Wie benutzte ich Processing
+		p("Wie benutzte ich Processing",getPerX(POINT1_X),getPerY(POINT1_Y)+60);
+		//Aufbau einer Anwendung
+		p("Aufbau einer Anwendung",getPerX(POINT1_X),getPerY(POINT1_Y)+80);
+		//Das erste Fenster
+		p("Das erste Fenster",getPerX(POINT1_X),getPerY(POINT1_Y)+100);
+		
+		//Mausposition abfragen
+		p("Mausposition abfragen",getPerX(POINT1_X),getPerY(POINT1_Y)+140);
+		//Tasten einlesen
+		p("Tasten einlesen",getPerX(POINT1_X),getPerY(POINT1_Y)+160);
+		//Das erste Rechteck
+		p("Das erste Rechteck",getPerX(POINT1_X),getPerY(POINT1_Y)+180);
+		//Der erste Kreis
+		p("Der erste Kreis",getPerX(POINT1_X),getPerY(POINT1_Y)+200);
+		//Farbe Rand und Füllung
+		p("Farbe Rand und Füllung",getPerX(POINT1_X),getPerY(POINT1_Y)+220);
+		
+		//Bilder Laden
+		p("Bilder Laden",getPerX(POINT1_X),getPerY(POINT1_Y)+240);
+		//rotate und translate
+		p("rotate und translate",getPerX(POINT1_X),getPerY(POINT1_Y)+260);
+		//Shapes
+		p("Shapes",getPerX(POINT1_X),getPerY(POINT1_Y)+280);
+		
+		//Open Processing
+		p("Open Processing",getPerX(POINT1_X),getPerY(POINT1_Y)+320);
+		
+		//Fazit
+		p("Fazit",getPerX(POINT1_X),getPerY(POINT1_Y)+360);
 	}
 	
 	/*
@@ -329,7 +364,7 @@ public class Vortrag extends PApplet {
 	public void vortragPage10() {
 		h1("...und der erste Kreis",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("Methode: ellipse(x,y,width,height)");
-		bullet2("x,y koordinaten der linken oberen Kante");
+		bullet2("x,y koordinaten der Mittelpunkt");
 		bullet3("width ist die Breite");
 		bullet4("height ist die Höhe");
 		bullet5("Methode ellipseMode(mode)");
@@ -448,8 +483,8 @@ public class Vortrag extends PApplet {
 			if(keyCode == 82) page16demo3 = true; // (r)otate
 		}
 		h1("rotate and translate",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet2("translate");
-		bullet1("pushMatrix und popMatrix");	//pushMatrix() <- Merkt sich den Ausgangspunkt und mit popMatrix wird er zurück gesetzt
+		bullet1("translate");
+		bullet2("pushMatrix und popMatrix");	//pushMatrix() <- Merkt sich den Ausgangspunkt und mit popMatrix wird er zurück gesetzt
 		bullet3("rotate");
 		
 		//Bild der des Zeichen Zettels
@@ -527,10 +562,10 @@ public class Vortrag extends PApplet {
 	//Start des Inhalts 6,48
 	public int demoScreen(String text, int x, int y) {
 		int size = 300;
-		image(clouds,x-500,y-150);	//Unbedingt Clouds anpassen!
-		fill(0);
-		rect(x+size+20,y,300,100);
-		fill(255);
+		//image(clouds,x-500,y-150);	//Unbedingt Clouds anpassen!
+		//fill(0);
+		//rect(x+size+20,y,300,100);
+		//fill(255);
 		image(demo, x, y);
 		return size;
 	}

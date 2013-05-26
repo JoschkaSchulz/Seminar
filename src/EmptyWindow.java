@@ -22,6 +22,7 @@ public class EmptyWindow extends PApplet {
 	
 	public void keyReleased() {
 		System.out.println("key Released");
+		System.out.println("KEYCODE:"+keyCode);
 	}
 	
 	public void keyTyped() {

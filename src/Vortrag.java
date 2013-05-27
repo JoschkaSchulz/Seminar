@@ -7,6 +7,7 @@
 import java.awt.Frame;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Vector;
 
 import processing.core.PApplet;
@@ -142,7 +143,7 @@ public class Vortrag extends PApplet {
 		if(current > 0) f("Joschka Schulz",getPerX(FOOTER_NAME_X), height-26);
 				
 		//Seitennummer
-		if(current > 0) f("Seite "+current+"/20",getPerX(FOOTER_PAGENUMBER_X), height-26);
+		if(current > 0) f("Seite "+current+"/22",getPerX(FOOTER_PAGENUMBER_X), height-26);
 	}
 	
 	/*
@@ -200,12 +201,12 @@ public class Vortrag extends PApplet {
 	 * Seite 2b - Was ist Processing
 	 */
 	public void vortragPage2b(   ) {
-		h1("Geschichte - Casey Reas und Benjamin Fry",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Geschichte - Benjamin Fry und Casey Reas",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("Broad Institute");
-		bullet3("UCLA Design Media Arts");
+		bullet2("http://benfry.com/");
+		bullet3("UCLA Design / Media Arts");
+		bullet4("http://www.reas.com/");
 		bullet5("Getting Started with Processing");
-//		bullet4("- ");
-//		bullet5("- ");
 	}
 	
 	/*
@@ -216,8 +217,6 @@ public class Vortrag extends PApplet {
 		bullet1("Interaktive Lichtinstallation");
 		bullet3("Forschung");
 		bullet5("Grafische Visualisierungen");
-//		bullet4("-");
-//		bullet5("-");
 	}
 	
 	/*
@@ -557,13 +556,14 @@ public class Vortrag extends PApplet {
 			if(keyCode == 66) page16demo2 = true; // (b)ack
 		}
 		if(page16demo3) {
+			rotate(PI/5.0f);
 		}else{
 			if(keyCode == 82) page16demo3 = true; // (r)otate
 		}
 		h1("rotate and translate",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("translate");
-		bullet2("pushMatrix und popMatrix");	//pushMatrix(   ) <- Merkt sich den Ausgangspunkt und mit popMatrix wird er zurück gesetzt
-		bullet3("rotate");
+		bullet1("translate(x,y)");
+		bullet2("pushMatrix(   ) und popMatrix(   )");	//pushMatrix(   ) <- Merkt sich den Ausgangspunkt und mit popMatrix wird er zurück gesetzt
+		bullet3("rotate(angle)");
 		
 		//Bild der des Zeichen Zettels
 		image(translate, getPerX(POINT1_X+35), getPerY(POINT1_Y));
@@ -586,7 +586,7 @@ public class Vortrag extends PApplet {
 		if(page17demo) {
 			int x = getPerX(40);
 			int y = getPerY(50);
-			int size = demoScreen("Mausposition", x, y);
+			int size = demoScreen("Shapes", x, y);
 			x+=6; y+=48;//Koordinaten korigieren
 			
 			
@@ -630,17 +630,50 @@ public class Vortrag extends PApplet {
 						al.add(new Point(mouseX, mouseY));
 				}
 			}
+		}else {
+			if(v == 0.01f) v = 0.05f;
+			else if (v == 0.05f) v = 0.1f;
+			else v = 0.01f;
 		}
 	}
 	
 	/*
 	 * Seite 18 - 
 	 */
+	boolean page18demo = false;
+	float t = 0; 
+	float v = 0.01f;
+	LinkedList<Float> n = new LinkedList<>();
 	public void vortragPage18(   ) {
-		h1("Mathematik",getPerX(HEAD_X),getPerY(HEAD_Y));
+		h1("Noise und Constraint",getPerX(HEAD_X),getPerY(HEAD_Y));
 		bullet1("noise(xoff)");
 		bullet3("constraint(min,max)");
-		bullet5("Klasse PVector");
+		
+		//Demo
+		if(page18demo) {
+			int x = getPerX(50);
+			int y = getPerY(50);
+			int size = demoScreen("Tasten", x, y);
+			x+=6; y+=48;//Koordinaten korigieren
+			
+			p("Konsole",x+size+20,y-20);
+			p("noise = "+v,x+size+20,y);
+			
+			if(n.size() >= 250) {
+				n.addLast(noise(t+=v));
+				n.removeFirst();
+			}else{
+				n.add(noise(t+=v));
+			}
+			stroke(0);
+			rect(x+10,y+10,250,100);
+			for(int i = 0; i < n.size(); i++) {
+				line(x+11+i,y+109,x+11+i,(y)+(n.get(i)*100));
+			}
+			stroke(255);
+		}else{
+			if(keyCode == 68) page18demo = true;
+		}
 	}
 	
 	/*
@@ -648,8 +681,10 @@ public class Vortrag extends PApplet {
 	 */
 	public void vortragPage18a(   ) {
 		h1("Zeiten",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("second(   ) minute(   ) und hour(   )");
+		bullet1("Lokale Zeiten");
+		bullet2("second(   ) minute(   ) und hour(   )");
 		bullet3("day(   ) month(   ) und year(   )");
+		bullet4("Fortlaufende Zeiten");
 		bullet5("millis(   )");
 	}
 	

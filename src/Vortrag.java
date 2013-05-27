@@ -201,9 +201,9 @@ public class Vortrag extends PApplet {
 	 */
 	public void vortragPage2b(   ) {
 		h1("Geschichte - Casey Reas und Benjamin Fry",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("");
-		bullet3("");
-		bullet5("");
+		bullet1("Broad Institute");
+		bullet3("UCLA Design Media Arts");
+		bullet5("Getting Started with Processing");
 //		bullet4("- ");
 //		bullet5("- ");
 	}
@@ -636,17 +636,33 @@ public class Vortrag extends PApplet {
 	/*
 	 * Seite 18 - 
 	 */
-//	public void vortragPage18(   ) {
-//		h1("Seite 18",getPerX(HEAD_X),getPerY(HEAD_Y));
-//	}
+	public void vortragPage18(   ) {
+		h1("Mathematik",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("noise(xoff)");
+		bullet3("constraint(min,max)");
+		bullet5("Klasse PVector");
+	}
+	
+	/*
+	 * Seite 18 - 
+	 */
+	public void vortragPage18a(   ) {
+		h1("Zeiten",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("second(   ) minute(   ) und hour(   )");
+		bullet3("day(   ) month(   ) und year(   )");
+		bullet5("millis(   )");
+	}
 	
 	/*
 	 * Seite 19 - Open Processing
 	 */
 	public void vortragPage19(   ) {
-		h1("Open Processing",getPerX(HEAD_X),getPerY(HEAD_Y));
-		bullet1("Platform für Processing Applikationen");
-		bullet2("http://www.openprocessing.org/");
+		h1("Seiten und Platformen",getPerX(HEAD_X),getPerY(HEAD_Y));
+		bullet1("Open Processing");
+		bullet2("http://www.openprocessing.org");
+		
+		bullet4("Processing.org");
+		bullet5("http://www.processing.org");
 	}
 	
 	
@@ -744,27 +760,28 @@ public class Vortrag extends PApplet {
 			case 1: vortragPage1(   ); break;
 			case 2: vortragPage2(   ); break;
 			case 3: vortragPage2a(   ); break;
-			//case 4: vortragPage2b(   ); break;
-			case 4: vortragPage3(   ); break;
-			case 5: vortragPage4(   ); break;
-			case 6: vortragPage5(   ); break;
-			case 7: vortragPage6(   ); break;
-			case 8: vortragPage7(   ); break;
-			case 9: vortragPage8(   ); break;
-			case 10: vortragPage9(   ); break;
-			case 11: vortragPage10(   ); break;
-			case 12: vortragPage11(   ); break;
+			case 4: vortragPage2b(   ); break;
+			case 5: vortragPage3(   ); break;
+			case 6: vortragPage4(   ); break;
+			case 7: vortragPage5(   ); break;
+			case 8: vortragPage6(   ); break;
+			case 9: vortragPage7(   ); break;
+			case 10: vortragPage8(   ); break;
+			case 11: vortragPage9(   ); break;
+			case 12: vortragPage10(   ); break;
+			case 13: vortragPage11(   ); break;
 //			case 12: vortragPage12(   ); break;
 //			case 13: vortragPage13(   ); break;
 //			case 14: vortragPage14(   ); break;
-			case 13: vortragPage15(   ); break;
-			case 14: vortragPage16(   ); break;
-			case 15: vortragPage17(   ); break;
-//			case 15: vortragPage18(   ); break;
-			case 16: vortragPage19(   ); break;
-			case 17: vortragPage20(   ); break;
-			case 18: vortragPage21(   ); break;
-			case 19: vortragPage22(   ); break;
+			case 14: vortragPage15(   ); break;
+			case 15: vortragPage16(   ); break;
+			case 16: vortragPage17(   ); break;
+			case 17: vortragPage18(   ); break;
+			case 18: vortragPage18a(   ); break;
+			case 19: vortragPage19(   ); break;
+			case 20: vortragPage20(   ); break;
+			case 21: vortragPage21(   ); break;
+			case 22: vortragPage22(   ); break;
 		}
 		
 		//For pdf mode

@@ -84,7 +84,7 @@ public class Vortrag extends PApplet {
 	public void bullet4(String text) {	fill(255); stroke(255); ellipse(getPerX(POINT4_X)-20, getPerX(POINT4_Y)-205, 10, 10); p(text, getPerX(POINT4_X), getPerY(POINT4_Y));}
 	public void bullet5(String text) {	fill(255); stroke(255); ellipse(getPerX(POINT5_X)-20, getPerX(POINT5_Y)-235, 10, 10); p(text, getPerX(POINT5_X), getPerY(POINT5_Y));}
 	
-	private PImage bg, demo, system, rotate, translate, clouds, logo, ide, eclipse,emptywindow, trenner;
+	private PImage bookcover, bg, demo, system, rotate, translate, clouds, logo, ide, eclipse,emptywindow, trenner;
 	private PFont kreide;
 	public void setup(   ) {
 		//Fullscreen
@@ -107,6 +107,8 @@ public class Vortrag extends PApplet {
 		eclipse = loadImage("eclipse.png");
 		emptywindow = loadImage("emptywindow.png");
 		trenner = loadImage("trenner.png");
+		bookcover = loadImage("bookcover.jpg");
+		bookcover.resize(350, 450);
 		
 		system = loadImage("system.png");
 		system.resize(400, 400);
@@ -207,6 +209,8 @@ public class Vortrag extends PApplet {
 		bullet3("UCLA Design / Media Arts");
 		bullet4("http://www.reas.com/");
 		bullet5("Getting Started with Processing");
+		
+		image(bookcover,getPerX(POINT1_X+40), getPerY(POINT1_Y-10));
 	}
 	
 	/*
